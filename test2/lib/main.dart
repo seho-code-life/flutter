@@ -20,6 +20,11 @@ class MyApp extends StatelessWidget {
           title: const Text('有状态无状态'),
         ),
         body: const BannerStateFulWidget(),
+        // 悬浮按钮
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.add_photo_alternate),
+        ),
       ),
     );
   }
@@ -57,6 +62,8 @@ class _BannerStateFulWidgetState extends State<BannerStateFulWidget> {
         ImageWidget(
           img: imgUrl,
         ),
+        const BannerList(),
+        const ListColumn()
       ],
     );
   }
@@ -70,9 +77,102 @@ class ImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(11),
-      color: Colors.amber,
       child: Image.network(img),
+      decoration: BoxDecoration(
+        color: Colors.amber,
+        border: Border.all(
+          color: Colors.red,
+          width: 10,
+        ),
+      ),
+    );
+  }
+}
+
+class BannerList extends StatelessWidget {
+  const BannerList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        // verticalDirection: VerticalDirection.up,
+        children: [
+          Expanded(
+            flex: 2,
+            child: SizedBox(
+              width: 100,
+              height: 100,
+              child: Image.network(img1),
+            ),
+          ),
+          const Spacer(),
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Image.network(img2),
+          ),
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Image.network(img1),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ListColumn extends StatelessWidget {
+  const ListColumn({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const FlutterLogo(
+          size: 24,
+        ),
+        const FlutterLogo(
+          size: 24,
+        ),
+        Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.center,
+          children: [
+            Container(
+              width: 100,
+              height: 100,
+              color: Colors.amber,
+            ),
+            // const Positioned(
+            //   left: 0,
+            //   bottom: 0,
+            //   child: FlutterLogo(size: 100),
+            // ),
+          ],
+        ),
+        const AlignItem()
+      ],
+    );
+  }
+}
+
+class AlignItem extends StatelessWidget {
+  const AlignItem({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Align(
+      widthFactor: 2,
+      heightFactor: 2,
+      alignment: Alignment.bottomLeft,
+      child: FlutterLogo(
+        size: 50,
+      ),
     );
   }
 }
